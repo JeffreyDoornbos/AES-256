@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Symmetrische Encryptie Demo – AES-256</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- CryptoJS via CDN (voor AES en PBKDF2) -->
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.min.js"></script>
+
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Symmetrische Encryptie Demo</h1>
+      <p class="subtitle">
+        Versleutel en ontsleutel tekst met <strong>AES-256 (CBC)</strong> via
+        <span class="mono">crypto-js</span>.
+      </p>
+    </header>
+
+    <section class="grid">
+      <div>
+        <label for="plaintext">Platte tekst (invoer voor versleuteling)</label>
+        <textarea id="plaintext" placeholder="Typ hier de tekst die je wilt versleutelen..."></textarea>
+      </div>
+      <div>
+        <label for="ciphertext">Ciphertext (uitvoer / invoer voor ontsleuteling)</label>
+        <textarea
+          id="ciphertext"
+          placeholder="Na versleuteling verschijnt hier een JSON-structuur met ct, iv en s..."
+        ></textarea>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div style="flex: 1 1 220px; min-width: 220px;">
+        <label for="password">Wachtwoord (wordt via PBKDF2 omgezet naar AES-sleutel)</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Kies een sterk wachtwoord..."
+          autocomplete="new-password"
+        />
+      </div>
+
+      <button class="btn" id="encryptBtn">
+        Versleutel
+        <span>→</span>
+      </button>
+
+      <button class="btn secondary" id="decryptBtn">
+        ←
+        <span>Ontsleutel</span>
+      </button>
+
+      <span class="badge">
+        <span class="badge-dot"></span>
+        AES-256 • CBC • PBKDF2
+      </span>
+    </section>
+
+    <p class="help-text" id="status">
+      Tip: bij versleuteling wordt een willekeurige <span class="mono">salt</span> en
+      <span class="mono">IV</span> gebruikt. In de ciphertext worden deze samen met de
+      versleutelde tekst opgeslagen als JSON. Deel dit formaat gerust: de veiligheid hangt alleen
+      af van je geheime wachtwoord (Kerckhoffs's principe).
+    </p>
+
+    <footer class="footer">
+      <span>Gebruik een sterk, uniek wachtwoord.</span>
+      <span class="mono">AES-256-CBC · PBKDF2 (100.000 iteraties)</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
